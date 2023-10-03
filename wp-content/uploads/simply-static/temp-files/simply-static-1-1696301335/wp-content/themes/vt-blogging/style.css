@@ -1813,6 +1813,7 @@ blockquote cite:before {
 .widget_posts_thumbnail .entry-meta {
     font-size: 11px;
     margin-top: 5px;
+	display:none;
 }
 
 /* Tag Cloud */

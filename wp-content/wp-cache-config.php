@@ -17,7 +17,7 @@ $cache_enabled = false;
 $super_cache_enabled = false;
 $cache_max_time = 1800;
 //$use_flock = true; // Set it true or false if you know what to use
-$cache_path = WP_CONTENT_DIR . '/cache/';
+$cache_path = 'C:\\xampp\\htdocs\\web\\wp-content/cache/';
 $file_prefix = 'wp-cache-';
 $ossdlcdn = 0;
 
@@ -78,7 +78,7 @@ $wp_cache_pages[ "single" ] = 0;
 $wp_cache_pages[ "author" ] = 0;
 $wp_cache_hide_donation = 0;
 $wp_cache_not_logged_in = 2;
-$wp_cache_clear_on_post_edit = 0;
+$wp_cache_clear_on_post_edit = 1;
 $wp_cache_hello_world = 0;
 $wp_cache_mobile_enabled = 0;
 $wp_cache_cron_check = 1;
