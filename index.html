@@ -108,7 +108,7 @@ img.emoji {
 :where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
 :where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
 .wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}</style>
-<link rel="stylesheet" id="uag-style-40-css" href="https://gonzodescargaz.github.io/web/wp-content/uploads/uag-plugin/assets/0/uag-css-40-1696302878.css?ver=2.7.11" type="text/css" media="all">
+<link rel="stylesheet" id="uag-style-40-css" href="https://gonzodescargaz.github.io/web/wp-content/uploads/uag-plugin/assets/0/uag-css-40-1696355702.css?ver=2.7.11" type="text/css" media="all">
 <link rel="stylesheet" id="vt-blogging-style-css" href="https://gonzodescargaz.github.io/web/wp-content/themes/vt-blogging/style.css?ver=1.1" type="text/css" media="all">
 <link rel="stylesheet" id="genericons-style-css" href="https://gonzodescargaz.github.io/web/wp-content/themes/vt-blogging/assets/fonts/genericons/genericons.css?ver=6.3.1" type="text/css" media="all">
 <link rel="stylesheet" id="vt-blogging-fonts-css" href="//fonts.googleapis.com/css?family=Open+Sans%3A400%2C600%2C700&#038;subset=latin%2Clatin-ext" type="text/css" media="all">
@@ -137,7 +137,7 @@ img.emoji {
 .sidebar .widget {
   border: 0;
   background: #373636;
-	padding: 0 0 0 7px;
+	padding:0;
 }
 .entry-meta.clear {
   display:none;
@@ -150,6 +150,7 @@ img.emoji {
 }
 #primary {
  width: calc(100% - 320px);
+box-shadow: 0 1px 2px 0 rgba(19, 18, 18, 0.74);
 }
 #secondary {
   width:300px;
@@ -211,6 +212,34 @@ color:#ddac6e;
 }
 .widget_posts_thumbnail .entry-meta {
   display: none;
+}
+.cat-item{
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius:5px;
+  background-color:#744942;
+  box-shadow: 0 1px 2px 0 rgba(19, 18, 18, 0.74);
+  margin:0;
+}
+.sidebar .widget ul > li a{
+text-shadow: 1px 1px 2px black;
+}
+.wp-block-heading {
+  color: #bd8c30;
+  text-align: center;
+  background-color: #232323;
+  padding: 7px 0;
+  font-size: 21px;
+}
+.widget-title {
+  color: #bd8c30;
+  text-align: center;
+  background-color: #232323;
+  font-size: 21px;
+}
+.attachment-vt_blogging_widget_thumb{
+  margin:0 0 0 4px;
+  box-shadow: 0 4px 8px 0 rgba(9, 9, 9, 0.74);
 }
 @media screen and (max-width: 980px) {
   #primary {
