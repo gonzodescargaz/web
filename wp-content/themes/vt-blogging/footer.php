@@ -15,7 +15,7 @@
 	
 	<footer id="colophon" class="site-footer">
 
-		<?php if ( ( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' ) || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) ) ) { ?>
+		<?php if ( ( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' )  || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) ) ) { ?>
 
 			<div class="footer-columns clear">
 
@@ -24,15 +24,15 @@
 					<div class="footer-column footer-column-1">
 						<?php dynamic_sidebar( 'footer-1' ); ?>
 					</div>
-
+					
 					<div class="footer-column footer-column-2">
 						<?php dynamic_sidebar( 'footer-2' ); ?>
 					</div>
 
 					<div class="footer-column footer-column-3">
 						<?php dynamic_sidebar( 'footer-3' ); ?>
-					</div>											
-
+					</div>	
+										
 				</div><!-- .container -->
 
 			</div><!-- .footer-columns -->

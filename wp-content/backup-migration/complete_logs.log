@@ -1,0 +1,158 @@
+[2023-10-04 13:21:00] [LOG] Plugin has been activated
+[2023-10-04 13:21:03] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:03] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:03] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:03] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:03] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:03] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:03] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:03] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:03] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:03] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:03] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:03] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:03] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:03] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:03] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:03] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:04] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:04] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:04] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:04] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:04] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:04] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:04] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:04] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:04] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:04] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:04] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:04] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:05] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:05] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:05] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:05] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:06] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:06] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:06] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:06] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:06] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:06] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:06] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:06] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:08] [ERROR] There was an error before request shutdown (but it was not logged to backup/restore log)
+[2023-10-04 13:21:08] [ERROR] Error message: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:08] [ERROR] Error file/line: C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:08] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:24] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:24] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:24] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:24] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:24] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:24] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:24] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:24] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:24] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:24] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:24] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:24] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:24] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:24] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:24] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:24] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:24] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:24] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:24] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:24] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:24] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:24] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:24] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:24] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:24] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:24] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:24] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:24] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:25] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:25] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:25] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:25] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:26] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:26] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:26] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:26] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:27] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:27] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:27] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:27] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:28] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:28] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:28] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:28] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:29] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:29] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:29] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:29] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:35] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:35] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:35] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:35] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:45] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:45] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:45] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:45] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:21:56] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:21:56] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:21:56] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:21:56] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:22:07] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:22:07] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:22:07] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:22:07] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:22:18] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:22:18] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:22:18] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:22:18] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:22:28] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:22:28] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:22:28] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:22:29] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:22:39] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:22:39] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:22:39] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:22:39] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:22:50] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:22:50] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:22:50] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:22:50] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:23:01] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:23:01] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:23:01] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:23:01] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:23:05] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:23:05] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:23:05] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:23:05] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:23:11] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:23:11] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:23:11] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:23:11] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:23:22] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:23:22] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:23:22] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:23:22] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:23:33] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:23:33] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:23:33] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:23:33] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:23:44] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:23:44] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:23:44] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:23:44] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:23:54] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:23:54] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:23:54] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:23:54] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:24:05] [ERROR] Ha habido un error antes del cierre de la solicitud (pero no se ha registrado en el registro de copia de seguridad/restauración)
+[2023-10-04 13:24:05] [ERROR] Mensaje de error: Using ${var} in strings is deprecated, use {$var} instead
+[2023-10-04 13:24:05] [ERROR] Archivo/línea del error:C:\xampp\htdocs\web\wp-content\plugins\simply-static\src\class-ss-query.php|397
+[2023-10-04 13:24:05] [ERROR] Error handler: init#01|8192
+[2023-10-04 13:24:26] [LOG] El plugin ha sido desactivado
