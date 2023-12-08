@@ -24,7 +24,7 @@
 <?php wp_head(); ?>
 
 </head>
-
+Verification: ef29228f488d9887
 <body <?php body_class(); ?>>
 <div id="page" class="site">
 
