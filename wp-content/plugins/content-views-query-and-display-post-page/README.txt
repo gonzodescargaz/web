@@ -2,9 +2,9 @@
 Contributors: pt-guy
 Tags: post grid, post blocks, recent posts, gutenberg blocks, grid, display posts, post list, post slider, post accordion, gutenberg, blocks, category post, news, magazine, portfolio, latest posts, related posts
 Requires at least: 3.3
-Tested up to: 6.3.1
+Tested up to: 6.4
 Requires PHP: 5.5
-Stable tag: 3.5.0
+Stable tag: 3.6.1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -229,6 +229,24 @@ If you encounter any difficulties or if you have questions about Content Views, 
 
 
 == Changelog ==
+
+= 3.6.1.1 =
+* Update: [Block] Show the Block ID in the "Extra" tab of the Block settings, which can be used as VIEW_ID value in custom codes mentioned on [our documentation site](https://contentviewspro.com/documentation/?utm_source=wordpress&utm_medium=link&utm_campaign=changelog)
+* Other tweaks and improvements
+
+= 3.6.1 =
+* New: [Block] Add a Toolbar button to each block to open Block settings
+* Fix: [Block] Prevent responsive issue when using with page builder plugin
+* Fix: [Shortcode] It doesn't scroll to top of View after changing page, when enable pagination with the new layouts
+* Dev: [Block] Fix React warnings about "class", and unique "key" prop
+* Update: Add more instructions to the Library page, also rename it to 'Layout Library'
+
+= 3.6.0 =
+* New: Add 3 NEW FREE layouts (Grid 2, List, Overlay 1) to View shortcode
+* New: Add 'Library' to View shortcode to import ready-to-use patterns/layouts to new/existing View easily
+* New: Add 'Top Meta' field to View shortcode
+* Fix: Text Alignment of Scrollable block
+* Other tweaks and improvements
 
 = 3.5.0 =
 * New: [Block] Add 'Author Not In', 'Parent Page' options to blocks

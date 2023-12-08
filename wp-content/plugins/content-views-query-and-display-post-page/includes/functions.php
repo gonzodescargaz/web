@@ -615,6 +615,7 @@ if ( !class_exists( 'PT_CV_Functions' ) ) {
 				}
 			}
 
+			$GLOBALS[ 'cv_current_view' ] = $meta_id;
 			return apply_filters( PT_CV_PREFIX_ . 'view_settings', $view_settings );
 		}
 
@@ -1045,7 +1046,7 @@ if ( !class_exists( 'PT_CV_Functions' ) ) {
 			$offset						 = 0;
 
 			$pagination = PT_CV_Functions::setting_value( PT_CV_PREFIX . 'enable-pagination', $view_settings );
-			if ( $pagination || ContentViews_Block::is_block() ) {
+			if ( $pagination || ContentViews_Block::is_pure_block() ) {
 				$prefix							 = PT_CV_PREFIX . 'pagination-';
 				$field_setting					 = PT_CV_Functions::settings_values_by_prefix( $prefix );
 				$dargs[ 'pagination-settings' ]	 = apply_filters( PT_CV_PREFIX_ . 'pagination_settings', $field_setting, $prefix );
@@ -1216,6 +1217,8 @@ if ( !class_exists( 'PT_CV_Functions' ) ) {
 				if ( empty( $view_id ) ) {
 					$view_id = PT_CV_Functions::string_random();
 				}
+
+				$settings = apply_filters( PT_CV_PREFIX_ . 'preview_settings', $settings, $view_id );
 
 				// Show output
 				echo PT_CV_Functions::view_process_settings( $view_id, $settings );
@@ -1542,6 +1545,12 @@ if ( !class_exists( 'PT_CV_Functions' ) ) {
 					$shortcode_tags = $shortcode_tags_backup;
 				}
 			}
+		}
+
+		static function is_view( $arr = null ) {
+			// is 0 (not saved view), string (saved view), null (block)
+			$view_id = PT_CV_Functions::setting_value( PT_CV_PREFIX . 'view-id', $arr );
+			return ($view_id === null) ? false : true;
 		}
 
 	}

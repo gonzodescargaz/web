@@ -500,7 +500,7 @@ if ( !class_exists( 'PT_CV_Html' ) ) {
 		}
 
 		static function _field_readmore( $post, $fargs, $from = false ) {
-			if ( $from === 'content' && ContentViews_Block::is_block() ) {
+			if ( $from === 'content' && ContentViews_Block::is_pure_block() ) {
 				return '';
 			}
 

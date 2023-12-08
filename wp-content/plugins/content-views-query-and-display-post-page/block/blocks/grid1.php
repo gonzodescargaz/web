@@ -15,7 +15,14 @@ class ContentViews_Block_Grid1 extends ContentViews_Block {
 	}
 
 	function custom_atts() {
-		$atts = [];
+		$atts = [
+			'columns'			 => [
+				'default'	 => (object) [ 'md' => 3, 'xs' => 1 ],
+			],
+			'thumbnailHeight' => [
+				'default' => (object) [ 'md' => '250' ],
+			],
+		];
 
 		return $atts;
 	}

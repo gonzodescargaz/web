@@ -58,6 +58,9 @@
 			// Toggle dependencies
 			this.dependence_do_all();
 
+			// Disable Pro options
+			$( '.pt-cv-ispro select option' ).attr( 'disabled', 'disabled' );
+
 			// Prevent click on links
 			$( '#' + _prefix + 'preview-box' ).on( 'click', 'a', function ( e ) {
 				e.preventDefault();
@@ -453,7 +456,7 @@
 
 					// Scroll to preview box
 					$( 'html, body' ).animate( {
-						scrollTop: $preview.offset().top - 100
+						scrollTop: $preview.offset().top - 145
 					}, $self.options.scroll_time );
 
 					/// Send request

@@ -10,7 +10,7 @@
  * Plugin Name:       Content Views
  * Plugin URI:        http://wordpress.org/plugins/content-views-query-and-display-post-page/
  * Description:       Beautiful post grid, post list, post slider, post accordion, and more for Blogs, News, Shop, Personal, Business, and any kind of websites. With 15 blocks, 75+ patterns, and a powerful shortcode module for the Classic editor.
- * Version:           3.5.0
+ * Version:           3.6.1.1
  * Author:            Content Views
  * Author URI:        http://profiles.wordpress.org/pt-guy
  * Text Domain:       content-views-query-and-display-post-page
@@ -24,7 +24,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 // Define Constant
-define( 'PT_CV_VERSION', '3.5.0' );
+define( 'PT_CV_VERSION', '3.6.1.1' );
 define( 'PT_CV_FILE', __FILE__ );
 define( 'PT_CV_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PT_CV_URL', plugin_dir_url( __FILE__ ) );
@@ -42,6 +42,7 @@ include_once( PT_CV_PATH . 'includes/settings.php' );
 include_once( PT_CV_PATH . 'includes/update.php' );
 include_once( PT_CV_PATH . 'includes/values.php' );
 include_once( PT_CV_PATH . 'block/init.php' );
+include_once( PT_CV_PATH . 'includes/block_view.php' );
 
 // Main file
 include_once( PT_CV_PATH . 'public/content-views.php' );

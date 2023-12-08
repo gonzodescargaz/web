@@ -45,13 +45,16 @@ class Archive_Creation_Job extends \WP_Background_Process {
 	 */
 	public function __construct() {
 		$this->options   = Options::instance();
-		$this->task_list = apply_filters( 'simplystatic.archive_creation_job.task_list', array(), $this->options->get( 'delivery_method' ) );
 
 		if ( ! $this->is_job_done() ) {
 			register_shutdown_function( array( $this, 'shutdown_handler' ) );
 		}
 
 		parent::__construct();
+	}
+
+	public function get_task_list() {
+		return apply_filters( 'simplystatic.archive_creation_job.task_list', array(), $this->options->get( 'delivery_method' ) );
 	}
 
 	/**
@@ -76,12 +79,14 @@ class Archive_Creation_Job extends \WP_Background_Process {
 
 		if ( $this->is_job_done() ) {
 
+			$task_list = $this->get_task_list();
+
 			Util::debug_log( "Starting a job; no job is presently running" );
-			Util::debug_log( "Here's our task list: " . implode( ', ', $this->task_list ) );
+			Util::debug_log( "Here's our task list: " . implode( ', ', $task_list ) );
 
 			do_action( 'ss_archive_creation_job_before_start_queue', $blog_id, $this );
 
-			$first_task   = $this->task_list[0];
+			$first_task   = $task_list[0];
 			$archive_name = join( '-', array( Plugin::SLUG, $blog_id, time() ) );
 
 			$this->options
@@ -282,16 +287,17 @@ class Archive_Creation_Job extends \WP_Background_Process {
 	 */
 	protected function find_next_task() {
 		$task_name = $this->get_current_task();
-		$index     = array_search( $task_name, $this->task_list );
+		$task_list = $this->get_task_list();
+		$index     = array_search( $task_name, $task_list );
 		if ( $index === false ) {
 			return null;
 		}
 
 		$index += 1;
-		if ( ( $index ) >= count( $this->task_list ) ) {
+		if ( ( $index ) >= count( $task_list ) ) {
 			return null;
 		} else {
-			return $this->task_list[ $index ];
+			return $task_list[ $index ];
 		}
 	}
 
@@ -307,17 +313,13 @@ class Archive_Creation_Job extends \WP_Background_Process {
 	 *
 	 * @return void
 	 */
-	protected function save_status_message( $message, $key = null ) {
-		$task_name = $key ?: $this->get_current_task();
-		$messages  = $this->options->get( 'archive_status_messages' );
-		Util::debug_log( 'Status message: [' . $task_name . '] ' . $message );
-
-		$messages = Util::add_archive_status_message( $messages, $task_name, $message );
-
-		$this->options
-			->set( 'archive_status_messages', $messages )
-			->save();
-	}
+    protected function save_status_message( $message, $key = null ) {
+        $task_name = $key ?: $this->get_current_task();
+        $this->options
+            ->add_status_message($message, $task_name)
+            ->save();
+        Util::debug_log( 'Status message: [' . $task_name . '] ' . $message );
+    }
 
 	/**
 	 * Add a status message about the exception and cancel the job

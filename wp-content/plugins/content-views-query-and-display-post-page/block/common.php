@@ -14,12 +14,10 @@ class ContentViews_Block_Common {
 	}
 
 	function add_block_category( $categories, $editor_context ) {
-		if ( !empty( $editor_context->post ) ) {
-			array_unshift( $categories, array(
-				'slug'	 => 'contentviews-blocks',
-				'title'	 => __( 'Content Views - Post Grid & Filter', 'content-views-query-and-display-post-page' )
-			) );
-		}
+		array_unshift( $categories, array(
+			'slug'	 => 'contentviews-blocks',
+			'title'	 => __( 'Content Views - Post Grid & Filter', 'content-views-query-and-display-post-page' )
+		) );
 
 		return $categories;
 	}
@@ -75,10 +73,12 @@ class ContentViews_Block_Common {
 		);
 
 		// some filters only for Block
-		add_filter( PT_CV_PREFIX_ . 'post_types_list', array( 'PT_CV_Hooks', 'filter_post_types_list' ) );
-		add_filter( PT_CV_PREFIX_ . 'pagination_styles', array( 'PT_CV_Hooks', 'filter_pagination_styles' ) );
-		add_filter( PT_CV_PREFIX_ . 'regular_orderby', array( 'PT_CV_Hooks', 'filter_regular_orderby' ), 11 );
-		$GLOBALS[ 'cvBlock' ] = true;
+		if ( !isset( $GLOBALS[ 'cv_outside_gutenberg' ] ) ) {
+			add_filter( PT_CV_PREFIX_ . 'post_types_list', array( 'PT_CV_Hooks', 'filter_post_types_list' ) );
+			add_filter( PT_CV_PREFIX_ . 'pagination_styles', array( 'PT_CV_Hooks', 'filter_pagination_styles' ) );
+			add_filter( PT_CV_PREFIX_ . 'regular_orderby', array( 'PT_CV_Hooks', 'filter_regular_orderby' ), 11 );
+			$GLOBALS[ 'cvBlock' ] = true;
+		}
 
 		$js_data = array(
 			'plugin_url' => PT_CV_URL,
@@ -102,21 +102,10 @@ class ContentViews_Block_Common {
 				'upgrade_link' => 'https://www.contentviewspro.com/pricing/',
 				'upgrade_text' => __( "Upgrade Now", "content-views-query-and-display-post-page" ),
 				'button_text'  => __( "Content Views Library", "content-views-query-and-display-post-page" ),
+				'confirm_text' => __( "Press OK/Enter to finish importing", "content-views-query-and-display-post-page" ),
 				'hide_button'  => PT_CV_Functions::get_option_value( 'hide_toolbar_button' ),
 				'layout_img' => plugins_url( 'assets/layouts/', __FILE__ ),
-				'pre_layouts'				 => array(
-					'grid1'		 => [ 'layout1' => '', 'layout2' => '', 'layout3' => 1 ],
-					'list1'		 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1 ],
-					'onebig1'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1 ],
-					'onebig2'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1, 'layout4' => 1 ],
-					'overlay2'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1 ],
-					'overlay3'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1 ],
-					'overlay4'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1, 'layout4' => 1, 'layout5' => 1 ],
-					'overlay5'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1, 'layout4' => 1 ],
-					'overlay6'	 => [ 'layout1' => '', 'layout2' => '', 'layout3' => '', ],
-					'overlay7'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1, 'layout4' => 1, 'layout5' => 1 ],
-					'overlay8'	 => [ 'layout1' => 1, 'layout2' => 1, 'layout3' => 1, 'layout4' => 1, ],
-				),
+				'pre_layouts'	 => self::layout_variants(),
 				'request_method' => self::set_request_method(),
 				'woo_pick' => self::woo_pick_options(),
 				'post_types' => PT_CV_Values::post_types(),
@@ -162,41 +151,12 @@ class ContentViews_Block_Common {
 					'heading5'	 => __( 'Heading 5', 'content-views-query-and-display-post-page' ),
 					'heading6'	 => __( 'Heading 6', 'content-views-query-and-display-post-page' ),
 				),
-				'thumb_effects'				 => array(
-					''			 => __( 'None', 'content-views-query-and-display-post-page' ),
-					'cveffect-darken'	 => __( 'Darken', 'content-views-query-and-display-post-page' ),
-					'cveffect-zoomin'	 => __( 'Zoom in', 'content-views-query-and-display-post-page' ),
-					'cveffect-zoomout'	 => __( 'Zoom out', 'content-views-query-and-display-post-page' ),
-					'cveffect-moveup'	 => __( 'Move up', 'content-views-query-and-display-post-page' ),
-					'cveffect-movedown'	 => __( 'Move down', 'content-views-query-and-display-post-page' ),
-					'cveffect-moveleft'	 => __( 'Move left', 'content-views-query-and-display-post-page' ),
-					'cveffect-moveright' => __( 'Move right', 'content-views-query-and-display-post-page' ),
-				),
-				'overlaytypes'				 => array(
-					''			 => __( 'None', 'content-views-query-and-display-post-page' ),
-					'simple'	 => __( 'Color', 'content-views-query-and-display-post-page' ),
-					'gradient'	 => __( 'Gradient', 'content-views-query-and-display-post-page' ),
-				),
-				'ovlposi'					 => array(
-					'top'	 => __( 'Top', 'content-views-query-and-display-post-page' ),
-					'middle' => __( 'Middle', 'content-views-query-and-display-post-page' ),
-					'bottom' => __( 'Bottom', 'content-views-query-and-display-post-page' ),
-				),
+				'thumb_effects'				 => self::thumbnail_effects(),
+				'overlaytypes'				 => self::ovl_types(),
+				'ovlposi'					 => self::ovl_positions(),
 				'onewidth'					 => ContentViews_Block_OneBig2::one_width(),
-				'top_meta'					 => array(
-					'mtt_taxonomy'	 => __( 'Taxonomy', 'content-views-query-and-display-post-page' ),
-					'mtt_author'	 => __( 'Author', 'content-views-query-and-display-post-page' ),
-					'mtt_date'		 => __( 'Date', 'content-views-query-and-display-post-page' ),
-				),
-				'taxo_positions'			 => array(
-					'above_title'		 => __( 'Above Title', 'content-views-query-and-display-post-page' ),
-					'below_title'		 => __( 'Below Title', 'content-views-query-and-display-post-page' ),
-					'over_top_left'		 => __( 'On Image (Top Left)', 'content-views-query-and-display-post-page' ),
-					'over_bottom_left'	 => __( 'On Image (Bottom Left)', 'content-views-query-and-display-post-page' ),
-					'over_top_right'	 => __( 'On Image (Top Right)', 'content-views-query-and-display-post-page' ),
-					'over_bottom_right'	 => __( 'On Image (Bottom Right)', 'content-views-query-and-display-post-page' ),
-					'over_center'		 => __( 'On Image (Center)', 'content-views-query-and-display-post-page' )
-				),
+				'top_meta'					 => self::topmeta_options(),
+				'taxo_positions'			 => self::topmeta_positions(),
 				'meta_fields'				 => self::meta_list(),
 				'meta_separator'			 => array(
 					''			 => __( 'None', 'content-views-query-and-display-post-page' ),
@@ -240,7 +200,8 @@ class ContentViews_Block_Common {
 
 	function enqueue_for_blocklib_page() {
 		$page = isset( $_GET[ 'page' ] ) ? sanitize_text_field( $_GET[ 'page' ] ) : null;
-		if ( $page === 'content-views-blocklibrary' ) {
+		if ( $page === 'content-views-blocklibrary' || $page === 'content-views-add' ) {
+			$GLOBALS[ 'cv_outside_gutenberg' ] = true;
 			$this->block_enqueue_assets();
 		}
 	}
@@ -308,6 +269,71 @@ class ContentViews_Block_Common {
 			$method = 'POST';
 		}
 		return $method;
+	}
+
+	static function layout_variants() {
+		return array(
+			'grid1'		 => [ 'layout1' => '', 'layout2' => '', 'layout3' => 1 ],
+			'list1'		 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1 ],
+			'onebig1'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1 ],
+			'onebig2'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1, 'layout4' => 1 ],
+			'overlay2'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1 ],
+			'overlay3'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1 ],
+			'overlay4'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1, 'layout4' => 1, 'layout5' => 1 ],
+			'overlay5'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1, 'layout4' => 1 ],
+			'overlay6'	 => [ 'layout1' => '', 'layout2' => '', 'layout3' => '', ],
+			'overlay7'	 => [ 'layout1' => '', 'layout2' => 1, 'layout3' => 1, 'layout4' => 1, 'layout5' => 1 ],
+			'overlay8'	 => [ 'layout1' => 1, 'layout2' => 1, 'layout3' => 1, 'layout4' => 1, ],
+		);
+	}
+
+	static function thumbnail_effects() {
+		return array(
+			''					 => __( 'None', 'content-views-query-and-display-post-page' ),
+			'cveffect-darken'	 => __( 'Darken', 'content-views-query-and-display-post-page' ),
+			'cveffect-zoomin'	 => __( 'Zoom in', 'content-views-query-and-display-post-page' ),
+			'cveffect-zoomout'	 => __( 'Zoom out', 'content-views-query-and-display-post-page' ),
+			'cveffect-moveup'	 => __( 'Move up', 'content-views-query-and-display-post-page' ),
+			'cveffect-movedown'	 => __( 'Move down', 'content-views-query-and-display-post-page' ),
+			'cveffect-moveleft'	 => __( 'Move left', 'content-views-query-and-display-post-page' ),
+			'cveffect-moveright' => __( 'Move right', 'content-views-query-and-display-post-page' ),
+		);
+	}
+
+	static function ovl_types() {
+		return array(
+			''			 => __( 'None', 'content-views-query-and-display-post-page' ),
+			'simple'	 => __( 'Color', 'content-views-query-and-display-post-page' ),
+			'gradient'	 => __( 'Gradient', 'content-views-query-and-display-post-page' ),
+		);
+	}
+
+	static function ovl_positions() {
+		return array(
+			'top'	 => __( 'Top', 'content-views-query-and-display-post-page' ),
+			'middle' => __( 'Middle', 'content-views-query-and-display-post-page' ),
+			'bottom' => __( 'Bottom', 'content-views-query-and-display-post-page' ),
+		);
+	}
+
+	static function topmeta_options() {
+		return array(
+			'mtt_taxonomy'	 => __( 'Taxonomy', 'content-views-query-and-display-post-page' ),
+			'mtt_author'	 => __( 'Author', 'content-views-query-and-display-post-page' ),
+			'mtt_date'		 => __( 'Date', 'content-views-query-and-display-post-page' ),
+		);
+	}
+
+	static function topmeta_positions() {
+		return array(
+			'above_title'		 => __( 'Above Title', 'content-views-query-and-display-post-page' ),
+			'below_title'		 => __( 'Below Title', 'content-views-query-and-display-post-page' ),
+			'over_top_left'		 => __( 'On Image (Top Left)', 'content-views-query-and-display-post-page' ),
+			'over_bottom_left'	 => __( 'On Image (Bottom Left)', 'content-views-query-and-display-post-page' ),
+			'over_top_right'	 => __( 'On Image (Top Right)', 'content-views-query-and-display-post-page' ),
+			'over_bottom_right'	 => __( 'On Image (Bottom Right)', 'content-views-query-and-display-post-page' ),
+			'over_center'		 => __( 'On Image (Center)', 'content-views-query-and-display-post-page' )
+		);
 	}
 
 	static function meta_list() {
@@ -581,17 +607,19 @@ class ContentViews_Block_Common {
 				$all_css[ 'grid_template' ][ $media ] = str_replace( [ '__VALUE__', '__ROW__', '__GAP__' ], [ $check_val, $rowHeight, $gapVal ], $grid_css );
 			}
 		}
-		
+
+		$all_css = apply_filters( PT_CV_PREFIX_ . 'block_generated_css', $all_css );
+
 		return
 		$view_css . "\n" .
 		implode( '', array_filter( array_column( $all_css, 'desktop' ) ) ) .
 		implode( '', array_filter( array_column( $all_css, 'hover' ) ) ) .
 		"\n@media all and (max-width: 1024px) { \n" .
 		implode( '', array_filter( array_column( $all_css, 'tablet' ) ) ) .
-		"\n} \n" .
+		"\n} " .
 		"\n@media all and (max-width: 767px) { \n" .
 		implode( '', array_filter( array_column( $all_css, 'mobile' ) ) ) .
-		"\n} \n";
+		"\n} ";
 	}
 
 	static function get_field_css( $atts, $field, $field_selector, &$all_css ) {
@@ -635,9 +663,6 @@ class ContentViews_Block_Common {
 			'box-shadow'	 => 'BoxShadow',
 		];
 		foreach ( $obj_types as $css_key => $attr_key ) {
-			if ( $css_key === 'width' && $field === 'thumbnail' && $atts[ 'blockName' ] === 'list1' && $atts[ 'whichLayout' ] === 'layout3' ) {
-				$css_key = 'min-width';
-			}
 			self::get_css( $css_desktop, $css_key, self::get_attr_value( $atts, $field . $attr_key, 'md', 'Units' ) );
 			self::get_css( $css_tablet, $css_key, self::get_attr_value( $atts, $field . $attr_key, 'sm', 'Units' ) );
 			self::get_css( $css_mobile, $css_key, self::get_attr_value( $atts, $field . $attr_key, 'xs', 'Units' ) );

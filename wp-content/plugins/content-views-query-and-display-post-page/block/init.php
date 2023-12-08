@@ -18,7 +18,7 @@ if ( !class_exists( 'ContentViews_Block' ) ) {
 
 		protected $block_name = '';
 		public $attributes			 = null;
-		protected $custom_attributes = [];
+		public $custom_attributes	 = [];
 		protected $title		 = '';
 		protected $desc			 = '';
 		protected $keywords		 = '';
@@ -198,10 +198,7 @@ if ( !class_exists( 'ContentViews_Block' ) ) {
 			}
 
 			// Switch fields position
-			if ( $settings[ PT_CV_PREFIX . 'show-field-title' ] && $settings[ PT_CV_PREFIX . 'show-field-taxoterm' ] && $settings[ PT_CV_PREFIX . 'taxo-position' ] === 'below_title' ) {
-				unset( $settings[ PT_CV_PREFIX . 'show-field-taxoterm' ] );
-				$settings = self::array_insert_after( $settings, PT_CV_PREFIX . 'show-field-title', array( PT_CV_PREFIX . 'show-field-taxoterm' => 1 ) );
-			}
+			$settings = ContentViews_Block::topmeta_reposition( $settings );
 
 			$settings = apply_filters( PT_CV_PREFIX_ . 'mapping_settings', $settings, $data );
 
@@ -557,7 +554,7 @@ if ( !class_exists( 'ContentViews_Block' ) ) {
 				'pagingNoScroll' => [
 					'__key'	     => '__SAME__',
 					'type'		 => 'boolean',
-					'default'	 => true,
+					'default'	 => false,
 				],
 				'headingText'	 => [
 					'type' => 'string',
@@ -653,6 +650,9 @@ if ( !class_exists( 'ContentViews_Block' ) ) {
 				}
 			}
 
+			// compatible: /extendify
+			$atts[ "extUtilities" ] = [ 'type' => 'array', ];
+
 			return apply_filters( PT_CV_PREFIX_ . 'block_attributes', $atts );
 		}
 
@@ -696,6 +696,14 @@ if ( !class_exists( 'ContentViews_Block' ) ) {
 			return PT_CV_Functions::setting_value( PT_CV_PREFIX . 'blockName' );
 		}
 
+		static function is_hybrid() {
+			return PT_CV_Functions::setting_value( PT_CV_PREFIX . 'hybridLayout' );
+		}
+
+		static function is_pure_block() {
+			return PT_CV_Functions::is_view() ? false : ContentViews_Block::is_block();
+		}
+
 		static function heading_output( $atts ) {
 			if ( !$atts[ 'showHeading' ] ) {
 				return '';
@@ -706,6 +714,20 @@ if ( !class_exists( 'ContentViews_Block' ) ) {
 			$prefix	 = PT_CV_PREFIX;
 			$heading = "<{$tag} class='{$prefix}heading-container $style' data-blockid='{$atts[ 'blockId' ]}'><span class='{$prefix}heading'> $text </span></{$tag}>";
 			return $heading;
+		}
+
+		static function topmeta_reposition( $settings, $from_view = false ) {			
+			if ( isset( $settings[ PT_CV_PREFIX . 'taxo-position' ] ) && !empty( $settings[ PT_CV_PREFIX . 'show-field-title' ] ) && !empty( $settings[ PT_CV_PREFIX . 'show-field-taxoterm' ] ) ) {
+				if ( $settings[ PT_CV_PREFIX . 'taxo-position' ] === 'below_title' ) {
+					unset( $settings[ PT_CV_PREFIX . 'show-field-taxoterm' ] );
+					$settings = self::array_insert_after( $settings, PT_CV_PREFIX . 'show-field-title', array( PT_CV_PREFIX . 'show-field-taxoterm' => $from_view ? 'yes' : 1 ) );
+				}
+				if ( $from_view && $settings[ PT_CV_PREFIX . 'taxo-position' ] === 'above_title' ) {
+					unset( $settings[ PT_CV_PREFIX . 'show-field-title' ] );
+					$settings = self::array_insert_after( $settings, PT_CV_PREFIX . 'show-field-taxoterm', array( PT_CV_PREFIX . 'show-field-title' => 'yes' ) );
+				}
+			}
+			return $settings;
 		}
 
 	}

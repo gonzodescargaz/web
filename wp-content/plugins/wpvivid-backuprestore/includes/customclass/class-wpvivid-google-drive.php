@@ -10,8 +10,6 @@ if(!defined('WPVIVID_REMOTE_GOOGLEDRIVE'))
     define('WPVIVID_REMOTE_GOOGLEDRIVE','googledrive');
 if(!defined('WPVIVID_GOOGLEDRIVE_DEFAULT_FOLDER'))
     define('WPVIVID_GOOGLEDRIVE_DEFAULT_FOLDER','wpvivid_backup');
-if(!defined('WPVIVID_GOOGLEDRIVE_SECRETS'))
-    define('WPVIVID_GOOGLEDRIVE_SECRETS',WPVIVID_PLUGIN_DIR.'/includes/customclass/client_secrets.json');
 if(!defined('WPVIVID_GOOGLEDRIVE_UPLOAD_SIZE'))
     define('WPVIVID_GOOGLEDRIVE_UPLOAD_SIZE',1024*1024*2);
 if(!defined('WPVIVID_GOOGLE_NEED_PHP_VERSION'))
@@ -57,7 +55,7 @@ class Wpvivid_Google_drive extends WPvivid_Remote
             "auth_uri"=>"https://accounts.google.com/o/oauth2/auth",
             "token_uri"=>"https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url"=>"https://www.googleapis.com/oauth2/v1/certs",
-            "client_secret"=>"GmD5Kmg_1fTcf0ciNEomposy",
+            "client_secret"=>"",
             "redirect_uris"=>array("https://auth.wpvivid.com/google_drive_v2/")
         ));
     }
@@ -631,8 +629,38 @@ class Wpvivid_Google_drive extends WPvivid_Remote
             if ($client->getRefreshToken())
             {
                 $tmp_refresh_token = $client->getRefreshToken();
+                /*
                 $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
                 $token=$client->getAccessToken();
+                */
+
+                $args = array(
+                    'refresh_token' => $tmp_refresh_token
+                );
+
+                $result = wp_remote_post("https://auth.wpvivid.com/google_drive_v2/", array(
+                    'timeout' => 60,
+                    'body' => $args
+                ));
+
+                if (is_wp_error($result))
+                {
+                    return array('result' => WPVIVID_PRO_SUCCESS,'data' => false);
+                }
+                else
+                {
+                    $token = wp_remote_retrieve_body($result);
+                    $token = json_decode($token, true);
+                    if(!is_null($token))
+                    {
+                        $client->setAccessToken($token);
+                    }
+                    else
+                    {
+                        return array('result' => WPVIVID_PRO_SUCCESS,'data' => false);
+                    }
+                }
+
                 $remote_options=WPvivid_Setting::get_remote_option($this->options['id']);
                 $this->options['token']=json_decode(json_encode($token),1);
                 if($remote_options!==false)
@@ -785,8 +813,38 @@ class Wpvivid_Google_drive extends WPvivid_Remote
             if ($client->getRefreshToken())
             {
                 $tmp_refresh_token = $client->getRefreshToken();
+                /*
                 $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
                 $token=$client->getAccessToken();
+                */
+
+                $args = array(
+                    'refresh_token' => $tmp_refresh_token
+                );
+
+                $result = wp_remote_post("https://auth.wpvivid.com/google_drive_v2/", array(
+                    'timeout' => 60,
+                    'body' => $args
+                ));
+
+                if (is_wp_error($result))
+                {
+                    return array('result' => WPVIVID_PRO_SUCCESS,'data' => false);
+                }
+                else
+                {
+                    $token = wp_remote_retrieve_body($result);
+                    $token = json_decode($token, true);
+                    if(!is_null($token))
+                    {
+                        $client->setAccessToken($token);
+                    }
+                    else
+                    {
+                        return array('result' => WPVIVID_PRO_SUCCESS,'data' => false);
+                    }
+                }
+
                 $this->options['token']=json_decode(json_encode($token),1);
                 if(!isset($this->options['token']['refresh_token'])){
                     $this->options['token']['refresh_token'] = $tmp_refresh_token;

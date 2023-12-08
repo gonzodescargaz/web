@@ -24,6 +24,7 @@ if ( !empty( $_GET[ 'id' ] ) ) {
 	$id = cv_sanitize_vid( $_GET[ 'id' ] );
 
 	if ( $id ) {
+		define( 'PT_CV_VIEW_PAGE', true );
 		global $pt_cv_admin_settings;
 		$pt_cv_admin_settings	 = $settings				 = PT_CV_Functions::view_get_settings( $id, $post_id );
 	}
@@ -91,6 +92,7 @@ PT_CV_Functions::view_submit();
 		<input type="hidden" name="<?php echo esc_attr( PT_CV_PREFIX . 'post-id' ); ?>" value="<?php echo esc_attr( $post_id ); ?>" />
 		<input type="hidden" name="<?php echo esc_attr( PT_CV_PREFIX . 'view-id' ); ?>" value="<?php echo esc_attr( $id ); ?>" />
 		<input type="hidden" name="<?php echo esc_attr( PT_CV_PREFIX . 'version' ); ?>" value="<?php echo esc_attr( apply_filters( PT_CV_PREFIX_ . 'view_version', 'free-' . PT_CV_VERSION ) ); ?>" />
+		<input type="hidden" name="<?php echo esc_attr( PT_CV_PREFIX . 'pattern-content' ); ?>" value="" />
 
 		<?php
 		// View title
@@ -153,7 +155,7 @@ PT_CV_Functions::view_submit();
 						),
 					),
 					// Upgrade to Pro: Custom post type
-					!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( __( 'Filter custom post type (product, event, and so on)', 'content-views-query-and-display-post-page' ) ) : '',
+					!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( 'postType', __( 'Filter custom post type (product, event, and so on)', 'content-views-query-and-display-post-page' ) ) : '',
 					apply_filters( PT_CV_PREFIX_ . 'custom_filters', array() ),
 					// Common Filters
 					array(
@@ -286,8 +288,8 @@ PT_CV_Functions::view_submit();
 							),
 						),
 					), // End Advanced Filters
-					!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( __( 'Filter by custom field, published date', 'content-views-query-and-display-post-page' ) ) : '',
-					!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( __( 'Allow visitors to filter, search, and sort in the front end', 'content-views-query-and-display-post-page' ) ) : '',
+					!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( 'filterCtf', __( 'Filter by custom field, published date', 'content-views-query-and-display-post-page' ) ) : '',
+					!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( 'LfEnable' ,__( 'Allow visitors to filter, search, and sort in the front end', 'content-views-query-and-display-post-page' ) ) : '',
 					// Settings of Advanced Filters options
 					array(
 						'label'			 => array(
@@ -327,7 +329,7 @@ PT_CV_Functions::view_submit();
 											),
 										),
 										// Upgrade to Pro: Custom taxonomy
-										!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( __( 'Filter by custom taxonomy', 'content-views-query-and-display-post-page' ) ) : '',
+										!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( 'taxonomy', __( 'Filter by custom taxonomy', 'content-views-query-and-display-post-page' ) ) : '',
 										// Terms list
 										array(
 											'label'			 => array(
@@ -485,7 +487,7 @@ PT_CV_Functions::view_submit();
 							array(
 								'type'	 => 'group',
 								'params' => array(
-									PT_CV_Settings::get_cvpro( __( 'Show this grid view on the Blog, Category, Tag, Search pages and replace the default layout', 'content-views-query-and-display-post-page' ), 12, null, true )
+									PT_CV_Settings::get_cvpro( 'replaceLayout', __( 'Show this grid view on the Blog, Category, Tag, Search pages and replace the default layout', 'content-views-query-and-display-post-page' ), 12, null, true )
 								),
 							),
 						),
@@ -530,7 +532,8 @@ PT_CV_Functions::view_submit();
 							),
 						),
 					),
-					!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( __( 'More amazing layouts (Pinterest, Timeline, Masonry, Glossary ...)', 'content-views-query-and-display-post-page' ), 10, 'margin-bottom:10px' ) : '',
+					apply_filters( PT_CV_PREFIX_ . 'layout_extra_settings', [] ),
+					!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( 'proLayout', __( 'Access to all PRO layouts', 'content-views-query-and-display-post-page' ), 10, 'margin-bottom:10px' ) : '',
 					apply_filters( PT_CV_PREFIX_ . 'more_responsive_settings', array(
 						'label'		 => array(
 							'text' => __( 'Responsive', 'content-views-query-and-display-post-page' ),
@@ -547,7 +550,7 @@ PT_CV_Functions::view_submit();
 											array(
 												'type'			 => 'number',
 												'name'			 => 'resp-tablet-number-columns',
-												'std'			 => '2',
+												'std'			 => '1',
 												'append_text'	 => '1 &rarr; 4',
 											),
 										),
@@ -568,8 +571,8 @@ PT_CV_Functions::view_submit();
 								),
 							),
 						),
-						'dependence' => array( 'view-type', !get_option( 'pt_cv_version_pro' ) ? array( 'grid' ) : array( 'grid', 'scrollable', 'pinterest', 'glossary', 'one_others' ) ),
-					) ),
+						'dependence' => array( 'view-type', apply_filters( PT_CV_PREFIX_ . 'responsive_columns', array( 'grid', 'scrollable', 'pinterest', 'glossary', 'one_others' ) ) ),
+	) ),
 					array(
 						'label'			 => array(
 							'text' => __( 'Format', 'content-views-query-and-display-post-page' ),
@@ -659,6 +662,7 @@ PT_CV_Functions::view_submit();
 								) ),
 							),
 						),
+						'dependence' => array( 'view-type', apply_filters( PT_CV_PREFIX_ . 'layout_format_depend', '' ), '!=' ),
 					),
 					// Fields settings
 					array(
@@ -720,7 +724,7 @@ PT_CV_Functions::view_submit();
 							array(
 								'type'	 => 'group',
 								'params' => array(
-									PT_CV_Settings::get_cvpro( __( 'Change color, font, size, other properties of any texts; padding, margin, text direction, etc. without writing CSS', 'content-views-query-and-display-post-page' ), 12, null, true )
+									PT_CV_Settings::get_cvpro( 'styleSetting', __( 'Change color, font, size, alignment, border, padding, margin, etc. of any elements without writing CSS', 'content-views-query-and-display-post-page' ), 12, null, true )
 								),
 							),
 						),

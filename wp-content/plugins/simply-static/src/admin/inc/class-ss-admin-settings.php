@@ -46,7 +46,7 @@ class Admin_Settings {
 		add_menu_page(
 			__( 'Simply Static', 'simply-static' ),
 			__( 'Simply Static', 'simply-static' ),
-			apply_filters( 'ss_user_capability', 'manage_options' ),
+            apply_filters( 'ss_user_capability', 'publish_pages' , 'generate'),
 			'simply-static-generate',
 			array( $this, 'render_settings' ),
 			SIMPLY_STATIC_URL . '/assets/simply-static-icon.svg',
@@ -56,7 +56,7 @@ class Admin_Settings {
 			'simply-static-generate',
 			__( 'Generate', 'simply-static' ),
 			__( 'Generate', 'simply-static' ),
-			apply_filters( 'ss_user_capability', 'manage_options' ),
+            apply_filters( 'ss_user_capability', 'publish_pages' , 'generate'),
 			'simply-static-generate',
 			array( $this, 'render_settings' )
 		);
@@ -67,7 +67,7 @@ class Admin_Settings {
 			'simply-static-generate',
 			__( 'Settings', 'simply-static' ),
 			__( 'Settings', 'simply-static' ),
-			apply_filters( 'ss_user_capability', 'manage_options' ),
+            apply_filters( 'ss_user_capability', 'manage_options' , 'settings'),
 			'simply-static-settings',
 			array( $this, 'render_settings' )
 		);
@@ -145,7 +145,8 @@ class Admin_Settings {
 		$debug_file = Util::get_debug_log_filename();
 
 		if ( file_exists( $debug_file ) ) {
-			$args['log_file'] = SIMPLY_STATIC_URL . '/debug.txt';
+            $uploadsDir = wp_upload_dir();
+			$args['log_file'] = $uploadsDir['baseurl'] . '/simply-static/debug.txt';
 		}
 
 		// Maybe show migration notice.
@@ -181,7 +182,7 @@ class Admin_Settings {
 			'methods'             => 'GET',
 			'callback'            => [ $this, 'get_settings' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options', 'settings' ) );
 			},
 		) );
 
@@ -189,7 +190,7 @@ class Admin_Settings {
 			'methods'             => 'POST',
 			'callback'            => [ $this, 'save_settings' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'manage_options', 'settings' ) );
 			},
 		) );
 
@@ -197,7 +198,7 @@ class Admin_Settings {
 			'methods'             => 'POST',
 			'callback'            => [ $this, 'reset_settings' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'manage_options', 'settings' ) );
 			},
 		) );
 
@@ -205,7 +206,7 @@ class Admin_Settings {
 			'methods'             => 'GET',
 			'callback'            => [ $this, 'get_pages' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options', 'settings') );
 			},
 		) );
 
@@ -213,7 +214,7 @@ class Admin_Settings {
 			'methods'             => 'POST',
 			'callback'            => [ $this, 'migrate_settings' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'manage_options', 'settings') );
 			},
 		) );
 
@@ -221,7 +222,7 @@ class Admin_Settings {
 			'methods'             => 'GET',
 			'callback'            => [ $this, 'get_system_status' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'manage_options', 'diagnostics') );
 			},
 		) );
 
@@ -229,7 +230,7 @@ class Admin_Settings {
 			'methods'             => 'POST',
 			'callback'            => [ $this, 'clear_log' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'manage_options', 'activity-log') );
 			},
 		) );
 
@@ -237,7 +238,7 @@ class Admin_Settings {
 			'methods'             => 'GET',
 			'callback'            => [ $this, 'get_activity_log' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'manage_options', 'activity-log') );
 			},
 		) );
 
@@ -245,7 +246,7 @@ class Admin_Settings {
 			'methods'             => 'GET',
 			'callback'            => [ $this, 'get_export_log' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'manage_options', 'activity-log') );
 			},
 		) );
 
@@ -253,7 +254,7 @@ class Admin_Settings {
 			'methods'             => 'POST',
 			'callback'            => [ $this, 'start_export' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'publish_pages', 'generate') );
 			},
 		) );
 
@@ -261,7 +262,7 @@ class Admin_Settings {
 			'methods'             => 'POST',
 			'callback'            => [ $this, 'cancel_export' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'publish_pages', 'generate') );
 			},
 		) );
 
@@ -269,7 +270,7 @@ class Admin_Settings {
 			'methods'             => 'GET',
 			'callback'            => [ $this, 'is_running' ],
 			'permission_callback' => function () {
-				return current_user_can( apply_filters( 'ss_user_capability', 'manage_options' ) );
+                return current_user_can( apply_filters( 'ss_user_capability', 'publish_pages', 'generate') );
 			},
 		) );
 	}
@@ -392,7 +393,7 @@ class Admin_Settings {
 	 * @return false|string
 	 */
 	public function clear_log() {
-		Util::delete_debug_log();
+		Util::clear_debug_log();
 
 		return json_encode( [ 'status' => 200, 'message' => "Ok" ] );
 	}
@@ -472,8 +473,6 @@ class Admin_Settings {
 	 * @return false|string
 	 */
 	public function is_running( $request ) {
-		$blog_id = ! empty( $params['blog_id'] ) ? $params['blog_id'] : 0;
-
 		return json_encode( [
 			'status'  => 200,
 			'running' => Plugin::instance()->get_archive_creation_job()->is_running()

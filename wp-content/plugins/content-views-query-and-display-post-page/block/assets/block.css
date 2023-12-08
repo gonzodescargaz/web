@@ -208,6 +208,7 @@
 
 .cvb-popup-right {
 	text-align: right;
+	margin-top: 10px;
 }
 .cvb-popup-right button {
 	text-align: right;	
@@ -602,8 +603,14 @@
 
 .cvb-units button {
 	height: 20px;
-    box-shadow: none !important;    
+	box-shadow: none !important;
 	color: #2196F3;
+	padding: 0 6px !important;
+	border: 1px solid #bbb;
+}
+.cvb-units button.components-button {
+	background: #f8f8f8;
+	text-transform: none !important;
 }
 
 .cvb-responsive-buttons .cvb-active, .cvb-units button {
@@ -854,4 +861,8 @@ option:disabled {
 
 .cvb-extraexclude .components-panel__body-title {
 	display: none !important;
+}
+
+.cv-toolbar-btn svg {
+	fill: #ff6a6f;
 }

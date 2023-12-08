@@ -351,7 +351,7 @@ class PT_Content_Views_Admin {
 		}
 
 		$this->plugin_sub_screen_hook_suffix[] = PT_CV_Functions::menu_add_sub(
-				$this->plugin_slug, __( 'Block Templates & Patterns', 'content-views-query-and-display-post-page' ), _x( 'Block Library', 'post' ), $user_role, 'blocklibrary', __CLASS__
+				$this->plugin_slug, __( 'Layout Library', 'content-views-query-and-display-post-page' ), _x( 'Layout Library', 'post' ), $user_role, 'blocklibrary', __CLASS__
 		);
 
 		$this->plugin_sub_screen_hook_suffix[] = PT_CV_Functions::menu_add_sub(

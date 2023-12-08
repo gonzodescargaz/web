@@ -274,7 +274,7 @@ if ( !class_exists( 'PT_CV_Hooks' ) ) {
 		 * @since 1.9.3
 		 */
 		public static function action_before_content() {
-			if ( ContentViews_Block::is_block() ) {
+			if ( ContentViews_Block::is_pure_block() ) {
 				return;
 			}
 
@@ -345,6 +345,10 @@ if ( !class_exists( 'PT_CV_Hooks' ) ) {
 
 			if ( ContentViews_Block::is_block() ) {
 				$args[] = 'iscvblock';
+
+				if ( ContentViews_Block::is_hybrid() ) {
+					$args[] = 'iscvhybrid';
+				}
 			}
 
 			if ( strpos( $view_type, 'onebig' ) !== false ) {
@@ -353,7 +357,7 @@ if ( !class_exists( 'PT_CV_Hooks' ) ) {
 			}
 
 			if ( $view_type === 'overlaygrid' ) {
-				if ( PT_CV_Functions::setting_value( PT_CV_PREFIX . 'overOnHover' ) ) {
+				if ( PT_CV_Functions::setting_value( PT_CV_PREFIX . 'overOnHover' ) && PT_CV_Functions::setting_value( PT_CV_PREFIX . 'overlaid' ) ) {
 					$args[] = PT_CV_PREFIX . 'onhover';
 				}
 				if ( ! PT_CV_Functions::setting_value( PT_CV_PREFIX . 'overlaid' ) ) {
@@ -452,6 +456,8 @@ if ( !class_exists( 'PT_CV_Hooks' ) ) {
 				if ( $excerp_length !== NULL ) {
 					$args[ 'field-settings' ][ 'content' ][ 'length' ] = $excerp_length;
 				}
+
+				$args = apply_filters( PT_CV_PREFIX_ . 'dargs_hybrid', $args );
 			} else {
 				remove_filter( PT_CV_PREFIX_ . 'field_title_class', array( __CLASS__, 'others_field_title_class' ) );
 
@@ -540,7 +546,7 @@ if ( !class_exists( 'PT_CV_Hooks' ) ) {
 
 		// Add extra data to pagination for block
 		public static function filter_pagination_data( $args ) {
-			$isblock = ContentViews_Block::is_block();
+			$isblock = ContentViews_Block::is_pure_block();
 			$postid	 = isset( $GLOBALS[ 'cv_current_post' ] ) ? $GLOBALS[ 'cv_current_post' ] : '';
 			$args	 = sprintf( 'data-isblock="%s" data-postid="%s"', esc_attr( $isblock ), esc_attr( $postid ) );
 			return $args;

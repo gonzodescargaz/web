@@ -1,0 +1,4 @@
+Log created: 2023-10-14 04:29:23
+Type: scan
+[2023-10-14 04:29:23][notice]server info fcgi:Off max execution time: 300 wp version:6.3.1 php version:8.2.4 db version:10.4.28 php ini:safe_mode: memory_limit:512M memory_get_usage:69,17 MB memory_get_peak_usage:69,93 MB extensions:PDO enabled curl enabled zlib enabled   is_multisite:0
+[2023-10-14 04:29:23][notice]Failed to get local storage directory.

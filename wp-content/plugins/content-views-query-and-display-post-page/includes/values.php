@@ -467,6 +467,92 @@ if ( !class_exists( 'PT_CV_Values' ) ) {
 			);
 		}
 
+		// from Pro
+		static function view_type_pro() {
+			$result = array(
+				'pinterest'	 => __( 'Pinterest', 'content-views-pro' ),
+				'masonry'	 => __( 'Masonry', 'content-views-pro' ),
+				'timeline'	 => __( 'Timeline', 'content-views-pro' ),
+				'glossary'	 => __( 'Glossary', 'content-views-pro' ),
+				'one_others' => __( 'One and others', 'content-views-pro' ),
+			);
+
+			return $result;
+		}
+
+		static function lname( $layout ) {
+			return str_replace( [ 'bigpost', 'ovl' ], [ 'onebig', 'overlay' ], $layout );
+		}
+
+		static function isprlayout( $layout, $variant = '' ) {
+			if ( get_option( 'pt_cv_version_pro' ) ) {
+				return false;
+			}
+			if ( !in_array( $layout, [ 'grid', 'collapsible', 'scrollable', 'grid1', 'list1', 'overlay1' ] ) ) {
+				return true;
+			}
+			if ( $variant && $variant !== 'layout1' ) {
+				return true;
+			}
+			return false;
+		}
+
+		// @since Hybrid
+		static function hybrid_layouts() {
+			$arr = [
+				'grid1'		 => __( 'Grid 2', 'content-views-pro' ),
+				'list1'		 => __( 'List', 'content-views-pro' ),
+				'overlay1'	 => __( 'Overlay 1', 'content-views-pro' ),
+				'ovl2'		 => __( 'Overlay 2', 'content-views-pro' ),
+				'ovl3'		 => __( 'Overlay 3', 'content-views-pro' ),
+				'ovl4'		 => __( 'Overlay 4', 'content-views-pro' ),
+				'ovl5'		 => __( 'Overlay 5', 'content-views-pro' ),
+				'ovl6'		 => __( 'Overlay 6', 'content-views-pro' ),
+				'ovl7'		 => __( 'Overlay 7', 'content-views-pro' ),
+				'ovl8'		 => __( 'Overlay 8', 'content-views-pro' ),
+				'bigpost1'	 => __( 'Big Post 1', 'content-views-pro' ),
+				'bigpost2'	 => __( 'Big Post 2', 'content-views-pro' ),
+			];
+			return apply_filters( PT_CV_PREFIX_ . 'hybrid_layouts', $arr );
+		}
+
+		// Old Pro + Block layouts
+		static function combined_layouts() {
+			return array_merge( self::view_type_pro(), self::hybrid_layouts() );
+		}
+
+		static function column_layouts( $layout = false ) {
+			$column3 = [ 'grid1', 'overlay1' ];
+			$column1 = [ 'list1', 'onebig1', 'onebig2' ];
+
+			if ( !$layout ) {
+				return array_merge( $column3, $column1 );
+			} else {
+				return in_array( $layout, $column3 ) ? '3' : (in_array( $layout, $column1 ) ? '1' : 0);
+			}
+		}
+
+		static function ovl_layouts( $from = 1 ) {
+			$ovl = [];
+			foreach ( range( $from, 8 ) as $number ) {
+				$ovl[]	 = 'overlay' . $number;
+				$ovl[]	 = 'ovl' . $number;
+			}
+			return $ovl;
+		}
+
+		static function hasone_layouts() {
+			$layouts = [ 'onebig1', 'onebig2' ];
+			$olv1 = self::ovl_layouts( 2 );
+			return array_merge( $layouts, $olv1 );
+		}
+
+		static function fixed_ppp_layouts() {
+			// ovl 2 3 4 5 7 8
+			$olv3 = self::ovl_layouts( 2 );
+			return array_values( array_diff( $olv3, [ 'ovl6', 'overlay6' ] ) );
+		}
+
 	}
 
 }

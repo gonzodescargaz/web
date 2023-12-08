@@ -1412,7 +1412,12 @@ class WPvivid_Staging_Free
 
         if($data!==false)
         {
-            wp_enqueue_style( "wpvivid-admin-bar", WPVIVID_PLUGIN_DIR_URL . "css/wpvivid-admin-bar.css", array(), WPVIVID_PLUGIN_VERSION );
+            $user = wp_get_current_user();
+            if($user->exists())
+            {
+                wp_enqueue_style( "wpvivid-admin-bar", WPVIVID_PLUGIN_DIR_URL . "css/wpvivid-admin-bar.css", array(), WPVIVID_PLUGIN_VERSION );
+            }
+
             if(!$this->is_login_page())
             {
                 if(is_multisite())

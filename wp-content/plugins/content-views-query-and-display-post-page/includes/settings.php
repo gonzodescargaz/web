@@ -101,7 +101,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 					),
 				),
 				// Upgrade to Pro: More sort by options
-				!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( __( 'Sort by drag & drop, custom field, random order, comment count', 'content-views-query-and-display-post-page' ) ) : '',
+				!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( 'proSort', __( 'Sort by drag & drop, custom field, random order, comment count', 'content-views-query-and-display-post-page' ) ) : '',
 				// Order
 				apply_filters( PT_CV_PREFIX_ . 'orders', array(
 					'label'	 => array(
@@ -153,7 +153,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 					),
 				),
 				// Items per page
-				array(
+				apply_filters( PT_CV_PREFIX_ . 'ppp_settings', array(
 					'label'			 => array(
 						'text' => __( 'Items per page', 'content-views-query-and-display-post-page' ),
 					),
@@ -172,7 +172,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 						),
 					),
 					'dependence'	 => array( 'enable-pagination', 'yes' ),
-				),
+				) ),
 				// Pagination Type
 				array(
 					'label'		 => array(
@@ -216,7 +216,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 									),
 									'dependence' => array( $prefix . 'type', 'normal', '!=' ),
 								),
-								!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( __( 'Other pagination styles: Infinite scrolling, Load more button', 'content-views-query-and-display-post-page' ) ) : '',
+								!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( 'pagingStyle', __( 'Advanced pagination styles: Infinite scrolling, Load more button', 'content-views-query-and-display-post-page' ) ) : '',
 							),
 						),
 					),
@@ -287,7 +287,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 					),
 				),
 				// Upgrade to Pro: Drag & Drop
-				!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( __( 'Show Custom Fields, show Title above Thumbnail...', 'content-views-query-and-display-post-page' ), 12, 'margin-top: -15px; margin-bottom: 5px;' ) : '',
+				!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( 'fieldsPosition', __( 'Show Custom Fields, show Title above Thumbnail ...', 'content-views-query-and-display-post-page' ), 12, 'margin-top: -10px; margin-bottom: 10px;' ) : '',
 				// Title settings
 				get_option( 'pt_cv_version_pro' ) ? apply_filters( PT_CV_PREFIX_ . 'settings_title_display', array(), $prefix, $prefix2 ) :
 					array(
@@ -311,6 +311,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 					'dependence'	 => array( $prefix2 . 'title', 'yes' ),
 					)
 				,
+				apply_filters( PT_CV_PREFIX_ . 'topmeta_settings', [], $prefix2 ),
 				// Thumbnail settings
 				array(
 					'label'			 => array(
@@ -341,12 +342,12 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 						),
 					),
 					'params'		 => array(
-						array(
+						apply_filters( PT_CV_PREFIX_ . 'content_settings', array(
 							'type'		 => 'radio',
 							'name'		 => $prefix . 'content-show',
 							'options'	 => PT_CV_Values::content_show(),
 							'std'		 => 'excerpt',
-						),
+						), $prefix ),
 					),
 					'dependence'	 => array( $prefix2 . 'content', 'yes' ),
 				),
@@ -436,6 +437,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 														),
 													),
 												),
+												apply_filters( PT_CV_PREFIX_ . 'excerpt_extra_settings', [], $prefix ),
 												!get_option( 'pt_cv_version_pro' ) ? array(
 													'label'	 => array(
 														'text' => '',
@@ -476,7 +478,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 															'std'		 => 'yes',
 														),
 													),
-													) : '',
+													) : '',												
 												!get_option( 'pt_cv_version_pro' ) ? array(
 													'label'	 => array(
 														'text' => '',
@@ -491,6 +493,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 													),
 													'dependence'	 => array( $prefix . 'excerpt-readmore', 'yes' ),
 													) : '',
+												!get_option( 'pt_cv_version_pro' ) ? apply_filters( PT_CV_PREFIX_ . 'readmore_extra_settings', [] ) : '',
 												), $prefix . 'excerpt-'
 											),
 										),
@@ -522,6 +525,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 					),
 					'dependence'	 => array( $prefix2 . 'meta-fields', 'yes' ),
 				),
+				apply_filters( PT_CV_PREFIX_ . 'metafield_extra_settings', [] ),
 				// Taxonomies settings
 				apply_filters( PT_CV_PREFIX_ . 'settings_taxonomies_display', array(), 'meta-fields-' ),
 			);
@@ -593,8 +597,9 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 							'std'		 => PT_CV_Functions::array_get_first_key( PT_CV_Values::thumbnail_position() ),
 						),
 					),
-					'dependence'	 => array( 'layout-format', '2-col' ),
+					'dependence'	 => apply_filters( PT_CV_PREFIX_ . 'thumbnail_position_depend', array( 'layout-format', '2-col' ) ),
 				),
+				apply_filters( PT_CV_PREFIX_ . 'thumbnail_position_extra', [] ),
 				// Show Thumbnail
 				array(
 					'label'			 => array(
@@ -614,6 +619,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 						),
 					),
 				),
+				apply_filters( PT_CV_PREFIX_ . 'topmeta_show', [], $prefix ),
 				// Show Title
 				array(
 					'label'			 => array(
@@ -718,9 +724,6 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 						),
 					),
 				),
-				!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( __( 'Show images in same size, set a custom size, overlay image with text, lazyload images', 'content-views-query-and-display-post-page' ) ) : '',
-				// Upgrade to Pro: Show image/video in content as thumbnail
-				!get_option( 'pt_cv_version_pro' ) ? PT_CV_Settings::get_cvpro( sprintf( __( 'In this lite version, thumbnail is only shown if the post has %s.<br>In the Pro version, you can show the first image/video in post as thumbnail, without having to set a featured image', 'content-views-query-and-display-post-page' ), sprintf( '<a target="_blank" href="https://codex.wordpress.org/Post_Thumbnails">%s</a>', __( 'Featured Image' ) ) ), 12, null, true ) : '',
 			);
 
 			$result = apply_filters( PT_CV_PREFIX_ . 'field_thumbnail_settings', $result, $prefix );
@@ -893,7 +896,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 			$prefix = 'scrollable-';
 
 			$result = array(
-				PT_CV_Settings::get_cvpro( __( 'Increase columns and rows in each slide, automatically cycle', 'content-views-query-and-display-post-page' ), 12, 'margin-top: 5px; margin-bottom: -5px;' )
+				PT_CV_Settings::get_cvpro( 'scrollOptions', __( 'Increase columns and rows in each slide, automatically cycle', 'content-views-query-and-display-post-page' ), 12, 'margin-top: 5px; margin-bottom: -5px;' )
 			);
 
 			$result = apply_filters( PT_CV_PREFIX_ . 'view_type_settings_scrollable', $result );
@@ -938,8 +941,8 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 		 * @param bool $notice
 		 * @return string
 		 */
-		static function get_cvpro( $text, $width = 10, $style = '', $notice = false ) {
-			$url = sprintf( ' &raquo; <a href="%s" target="_blank">%s</a>', esc_url( 'https://www.contentviewspro.com/?utm_source=client&utm_medium=view_fields&utm_campaign=gopro' ), __( 'get Pro version', 'content-views-query-and-display-post-page' ) );
+		static function get_cvpro( $campaign, $text, $width = 10, $style = '', $notice = false ) {
+			$url = sprintf( ' &raquo; <a href="%s" target="_blank">%s</a>', esc_url( "https://www.contentviewspro.com/?utm_source=client&utm_medium=view_fields&utm_campaign={$campaign}" ), __( 'get Pro version', 'content-views-query-and-display-post-page' ) );
 
 			return array(
 				'label'			 => array(
@@ -954,7 +957,7 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 					array(
 						'type'		 => 'html',
 						'content'	 => $notice ?
-							sprintf( '<div class="alert alert-warning cvgopro">%s</div>', $text . $url . '.' ) :
+							sprintf( '<div class="upgrade-notice cvgopro">&rarr; %s</div>', $text . $url . '.' ) :
 							sprintf( '<p class="text-muted cvgopro" style="%s">&rarr; %s</p>', $style, $text . $url ),
 					),
 				),
@@ -987,6 +990,681 @@ if ( !class_exists( 'PT_CV_Settings' ) ) {
 					),
 				),
 			);
+		}
+
+		static function blank_settings() {
+			return array(
+				'label'	 => array(
+					'text' => '',
+				),
+				'params' => array(
+					array(
+						'type'		 => 'html',
+						'content'	 => '',
+					),
+				),
+			);
+		}
+
+		static function prosetting_class( $value ) {
+			$pro = get_option( 'pt_cv_version_pro' ) ? false : $value;
+			return $pro ? array(
+				'params' => array(
+					'group-class' => PT_CV_PREFIX . 'ispro',
+				),
+			) : [];
+		}
+
+		// @since Hybrid
+		static function view_type_settings_hybrid( $layout ) {
+			if ( array_key_exists( $layout, PT_CV_Values::view_type_pro() ) ) {
+				return array(
+					self::blank_settings()
+				);
+			}
+
+			$prefix	 = "$layout-";
+			$columns = PT_CV_Values::column_layouts( $layout );
+
+			$result = array(
+				self::require_pro_version( $layout ),
+				in_array( $layout, PT_CV_Values::fixed_ppp_layouts() ) ? array(
+					'label'		 => array(
+						'text' => '',
+					),
+					'extra_setting'	 => array(
+						'params' => array(
+							'width' => 12,
+						),
+					),
+					'params'	 => array(
+						array(
+							'type'		 => 'html',
+							'content'	 => sprintf( '<p class="text-muted">%s.</p>', __( 'This layout uses its own "Limit" and "Items Per Page" options', 'content-views-query-and-display-post-page' ) ),
+						),
+					),
+				) : [],
+				self::hybrid_variants( $prefix ),
+				$columns ? array(
+					'label'	 => array(
+						'text' => __( 'Items per row', 'content-views-pro' ),
+					),
+					'params' => array(
+						array(
+							'type'			 => 'number',
+							'name'			 => $prefix . 'number-columns',
+							'std'			 => $columns,
+							'append_text'	 => '1 &rarr; 12',
+						),
+					),
+				) : [],
+			);
+
+			return $result;
+		}
+
+		static function require_pro_version( $layout ) {
+			if ( !in_array( $layout, array_keys( PT_CV_Values::hybrid_layouts() ) ) ) {
+				return [];
+			}
+
+			$require_pro = '6.0';
+			$pro_version = get_option( 'pt_cv_version_pro' );
+			$required	 = $pro_version && version_compare( $pro_version, $require_pro, '<' ) ? true : false;
+
+			return $required ? array(
+				'label'			 => array(
+					'text' => '',
+				),
+				'extra_setting'	 => array(
+					'params' => array(
+						'width' => 12,
+					),
+				),
+				'params'		 => array(
+					array(
+						'type'		 => 'html',
+						'content'	 => sprintf( '<p><strong>%s</strong>.</p>', sprintf( __( 'This layout requires PRO version %s or higher', 'content-views-query-and-display-post-page' ), $require_pro ) ),
+					),
+				),
+			) : [];
+		}
+
+		static function layout_shared_settings() {
+			$extra = PT_CV_Settings::prosetting_class( true );
+
+			$result = array(
+				array(
+					'label'	 => array(
+						'text' => __( 'Gap', 'content-views-pro' ),
+					),
+					'params' => array(
+						array(
+							'type'			 => 'number',
+							'name'			 => 'gridGap',
+							'std'			 => '15',
+							'append_text'	 => 'px',
+						),
+					),
+					'dependence' => array( 'view-type', array_keys( PT_CV_Values::hybrid_layouts() ) ),
+				),
+				array(
+					'label'			 => array(
+						'text' => __( 'Row Height', 'content-views-pro' ),
+					),
+					'extra_setting'	 => $extra,
+					'params'		 => array(
+						array(
+							'type'			 => 'number',
+							'name'			 => 'hetargetHeight',
+							'std'			 => '250',
+							'append_text'	 => 'px',
+						),
+					),
+					'dependence'	 => array( 'view-type', PT_CV_Values::ovl_layouts() ),
+				),
+				array(
+					'label'	 => array(
+						'text' => __( 'Swap Position', 'content-views-pro' ),
+					),
+					'params' => array(
+						array(
+							'type'		 => 'checkbox',
+							'name'		 => 'swapPosition',
+							'options'	 => PT_CV_Values::yes_no( 'yes', __( 'Enable', 'content-views-pro' ) ),
+							'std'		 => '',
+						),
+					),
+					'dependence' => array( 'view-type', 'onebig2' ),
+				),
+				array(
+					'label'		 => array(
+						'text' => __( 'Big Item Width', 'content-views-pro' ),
+					),
+					'params'	 => array(
+						array(
+							'type'		 => 'select',
+							'name'		 => 'oneWidth',
+							'options'	 => ContentViews_Block_OneBig2::one_width(),
+							'std'		 => '50%',
+						),
+					),
+					'dependence' => array( 'view-type', 'onebig2' ),
+				),
+				array(
+					'label'		 => array(
+						'text' => '',
+					),
+					'extra_setting'	 => array(
+						'params' => array(
+							'width' => 12,
+						),
+					),
+					'params'	 => array(
+						array(
+							'type'	 => 'group',
+							'params' => self::ovl_settings( $extra ),
+						),
+					),
+					'dependence' => array( 'view-type', PT_CV_Values::ovl_layouts() ),
+				)
+			);
+
+			return array(
+				'label'	 => array(
+					'text' => '',
+				),
+				'extra_setting'	 => array(
+					'params' => array(
+						'group-class' => PT_CV_PREFIX . 'shared-settings',
+					),
+				),
+				'params' => array(
+					array(
+						'type'	 => 'group',
+						'params' => $result,
+					),
+				),
+			);
+		}
+
+		static function hybrid_variants( $prefix ) {
+			$layout		 = trim( $prefix, '-' );
+			$layout		 = PT_CV_Values::lname( $layout );
+			$all		 = ContentViews_Block_Common::layout_variants();
+			$variants	 = isset( $all[ $layout ] ) ? $all[ $layout ] : [];
+			$options	 = [];
+			foreach ( array_keys( $variants ) as $variant ) {
+				$img				 = plugins_url( 'block/assets/layouts/', PT_CV_FILE ) . "$layout-$variant.svg";
+				$options[ $variant ] = PT_CV_Settings::layout_radio( $layout, $variant, $img, '' );
+			}
+
+			return $options ? array(
+				'label'	 => array(
+					'text' => __( 'Variant', 'content-views-query-and-display-post-page' ),
+				),
+				'extra_setting'	 => array(
+					'params' => array(
+						'group-class' => PT_CV_PREFIX . 'variant-list',
+					),
+				),
+				'params' => array(
+					array(
+						'type'		 => 'radio',
+						'name'		 => $prefix . 'layout-variant',
+						'options'	 => $options,
+						'std'		 => 'layout1',
+					),
+				),
+			) : [];
+		}
+
+		/**
+		 * @param type $layout	layout
+		 * @param type $variant	variant/false
+		 * @param type $img		img url
+		 * @param type $content content
+		 * @return type
+		 */
+		static function layout_radio( $layout, $variant, $img, $content = '' ) {
+			$badge = PT_CV_Values::isprlayout( $layout, $variant ) ? '<span class="pro-opt">PRO</span>' : '';
+			return sprintf( '<div class="%s">%s<img src="%s" loading="lazy" >%s</div>', $badge ? 'pro-opt' : '', $badge, $img, $content );
+		}
+
+		static function ovl_settings( $extra ) {
+			$depend = array( 'overlaid', 'yes' );
+
+			return array(
+				array(
+					'label'			 => array(
+						'text' => __( 'Mode', 'content-views-pro' ),
+					),
+					'extra_setting'	 => $extra,
+					'params'		 => array(
+						array(
+							'type'		 => 'radio',
+							'name'		 => 'overlaid',
+							'options'	 => [
+								'yes'	 => __( 'Overlay', 'content-views-query-and-display-post-page' ),
+								''		 => __( 'Compound', 'content-views-query-and-display-post-page' ),
+							],
+							'std'		 => 'yes',
+						),
+					),
+				),
+				array(
+					'label'		 => array(
+						'text' => __( 'Text Position', 'content-views-pro' ),
+					),
+					'params'	 => array(
+						array(
+							'type'		 => 'select',
+							'name'		 => 'overlayPosition',
+							'options'	 => ContentViews_Block_Common::ovl_positions(),
+							'std'		 => 'bottom',
+						),
+					),
+					'dependence' => $depend,
+				),
+				array(
+					'label'	 => array(
+						'text' => __( 'Overlay Type', 'content-views-pro' ),
+					),
+					'extra_setting'	 => $extra,
+					'params' => array(
+						array(
+							'type'		 => 'radio',
+							'name'		 => 'overlayType',
+							'options'	 => ContentViews_Block_Common::ovl_types(),
+							'std'		 => 'simple',
+						),
+					),
+					'dependence'	 => $depend,
+				),
+				
+				array(
+					'label'		 => array(
+						'text' => __( 'Show Text', 'content-views-query-and-display-post-page' ),
+					),
+					'extra_setting'	 => $extra,
+					'params'	 => array(
+						array(
+							'type'		 => 'radio',
+							'name'		 => 'overOnHover',
+							'options'	 => [
+								''		 => __( 'Always', 'content-views-query-and-display-post-page' ),
+								'yes'	 => __( 'On hover', 'content-views-query-and-display-post-page' ),
+							],
+							'std'		 => '',
+						),
+					),
+					'dependence'	 => $depend,
+				),
+				
+			);
+		}
+
+		static function others_settings( $name, $text, $skip_label = false, $width = 10 ) {
+
+			return array(
+				'label'	 => array(
+					'text' => $skip_label ? '' : $text,
+				),
+				'extra_setting'	 => array(
+					'params' => array(
+						'group-class'	 => PT_CV_PREFIX . 'others-settings',
+						'width'			 => $width,
+					)
+				),
+				'params' => array(
+					array(
+						'type'		 => 'checkbox',
+						'name'		 => $name,
+						'options'	 => PT_CV_Values::yes_no( 'yes', $skip_label ? $text : __( 'Enable' ) ),
+						'std'		 => 'yes',
+					),
+				),
+				'dependence' => array( 'view-type', PT_CV_Values::hasone_layouts() ),
+			);
+		}
+
+		static function topmeta_show_settings( $args, $prefix ) {
+			$args = array(
+				'label'			 => array(
+					'text' => '',
+				),
+				'extra_setting'	 => array(
+					'params' => array(
+						'width' => 12,
+					),
+				),
+				'params'		 => array(
+					array(
+						'type'		 => 'checkbox',
+						'name'		 => $prefix . 'taxoterm',
+						'options'	 => PT_CV_Values::yes_no( 'yes', __( 'Show Top Meta', 'content-views-query-and-display-post-page' ) ),
+						'std'		 => 'yes',
+					),
+				),
+			);
+
+			return $args;
+		}
+
+		static function topmeta_settings( $args, $prefix2 ) {
+
+			$prefix = 'taxoterm';
+
+			$extra = PT_CV_Settings::prosetting_class( true );
+
+			$args = array(
+				'label'			 => array(
+					'text' => __( 'Top Meta' ),
+				),
+				'extra_setting'	 => array(
+					'params' => array(
+						'group-class' => PT_CV_PREFIX . 'field-setting',
+					),
+				),
+				'params'		 => array(
+					array(
+						'type'	 => 'group',
+						'params' => array(
+							array(
+								'label'	 => array(
+									'text' => __( 'Select Meta', 'content-views-pro' ),
+								),
+								'extra_setting'	 => $extra,
+								'params' => array(
+									array(
+										'type'		 => 'select',
+										'name'		 => 'topmeta-which',
+										'options'	 => ContentViews_Block_Common::topmeta_options(),
+										'std'		 => '',
+									),
+								),
+							),
+							array(
+								'label'	 => array(
+									'text' => __( 'Taxonomy', 'content-views-pro' ),
+								),
+								'extra_setting'	 => $extra,
+								'params' => array(
+									array(
+										'type'		 => 'select',
+										'name'		 => 'taxo-which',
+										'options'	 => PT_CV_Values::taxonomy_list(),
+										'std'		 => '',
+									),
+								),
+								'dependence' => array( 'topmeta-which', 'mtt_taxonomy' ),
+							),
+							array(
+								'label'		 => array(
+									'text' => __( 'Position', 'content-views-pro' ),
+								),
+								'params'	 => array(
+									array(
+										'type'		 => 'select',
+										'name'		 => 'taxo-position',
+										'options'	 => ContentViews_Block_Common::topmeta_positions(),
+										'std'		 => 'above_title',
+									),
+								),
+								'dependence' => array( 'view-type', 'collapsible', '!=' ),
+							),
+							PT_CV_Settings::others_settings( 'show-field-taxoterm-Others', __( 'For Other Posts', 'content-views-pro' ) ),
+						),
+					),
+				),
+				'dependence'	 => array( $prefix2 . $prefix, 'yes' ),
+			);
+
+			return $args;
+		}
+
+		static function content_settings( $args, $prefix ) {
+			return array(
+				'type'	 => 'group',
+				'params' => array(
+					array(
+						'label'			 => array(
+							'text' => '',
+						),
+						'extra_setting'	 => array(
+							'params' => array(
+								'width' => 12,
+							),
+						),
+						'params'		 => array(
+							$args
+						),
+					),
+					PT_CV_Settings::others_settings( 'show-field-content-Others', __( 'For Other Posts', 'content-views-pro' ) ),
+				),
+			);
+		}
+
+		static function excerpt_extra_settings( $args, $prefix ) {
+			return array(
+				'label'	 => array(
+					'text' => '',
+				),
+				'params' => array(
+					array(
+						'type'			 => 'number',
+						'name'			 => 'excerptLengthOthers',
+						'std'			 => '15',
+						'placeholder'	 => '',
+						'append_text'	 => 'words',
+						'desc'			 => __( 'Excerpt length for other posts', 'content-views-query-and-display-post-page' ),
+					),
+				),
+				'dependence' => array( 'view-type', PT_CV_Values::hasone_layouts() ),
+			);
+		}
+
+		static function readmore_extra_settings( $args ) {
+			return PT_CV_Settings::others_settings( 'show-field-readmore-Others', __( 'Enable For Other Posts', 'content-views-pro' ), true, get_option( 'pt_cv_version_pro' ) ? 12 : 10 );
+		}
+
+		static function metafield_extra_settings( $args ) {
+			$args = array(
+				'label'			 => array(
+					'text' => '',
+				),
+				'extra_setting'	 => array(
+					'params' => array(
+						'group-class' => PT_CV_PREFIX . 'field-setting' . ' ' . PT_CV_PREFIX . 'metafield-extra1' . ' ' . (!get_option( 'pt_cv_version_pro' ) ? PT_CV_PREFIX . 'inlite' : ''),
+					),
+				),
+				'params'		 => array(
+					array(
+						'type'	 => 'group',
+						'params' => array(
+							PT_CV_Settings::others_settings( 'show-field-meta-fields-Others', __( 'For Other Posts', 'content-views-pro' ) )
+						),
+					),
+				),
+				'dependence'	 => array( 'show-field-' . 'meta-fields', 'yes' ),
+			);
+
+			return $args;
+		}
+
+		static function thumb_wh_default( $layout, $key ) {
+			if ( !empty( $GLOBALS[ 'contentviews_blocks' ][ $layout ]->custom_attributes[ $key ][ 'default' ] ) ) {
+				$value = (array) $GLOBALS[ 'contentviews_blocks' ][ $layout ]->custom_attributes[ $key ][ 'default' ];
+				return isset( $value[ 'md' ] ) ? $value[ 'md' ] : '';
+			}
+			return '';
+		}
+
+		static function thumbnail_extra_settings( $args, $prefix ) {
+			// Width, Height
+			$units			 = [ 'px', 'em', 'rem', '%', 'vw', 'vh' ];
+			$idx			 = 0;
+			$layouts_with_wh = array_values( array_diff( array_keys( PT_CV_Values::hybrid_layouts() ), PT_CV_Values::ovl_layouts() ) );
+			foreach ( $layouts_with_wh as $layout ) {
+				$with_sm = in_array( $layout, [ 'onebig1', 'onebig2' ] ) ? true : false;
+				foreach ( PT_CV_BlockToView::thumb_wh( $with_sm ) as $ar1 ) {
+					$inserted = array(
+						'label'			 => array(
+							'text' => $ar1[ 0 ],
+						),
+						'extra_setting'	 => array(
+							'params' => array(
+								'group-class' => PT_CV_PREFIX . 'size-group',
+							),
+						),
+						'params'		 => array(
+							array(
+								'type'	 => 'number',
+								'name'	 => "$layout-" . $ar1[ 1 ],
+								'std'	 => self::thumb_wh_default( $layout, $ar1[ 1 ] ),
+							),
+							array(
+								'type'		 => 'select',
+								'name'		 => "$layout-" . $ar1[ 2 ],
+								'options'	 => array_combine( $units, $units ),
+								'std'		 => self::thumb_wh_default( $layout, $ar1[ 2 ] ),
+							),
+						),
+						'dependence'	 => array( 'view-type', $layout ),
+					);
+
+					$inserted = array(
+						'label'			 => array(
+							'text' => '',
+						),
+						'extra_setting'	 => array(
+							'params' => array(
+								'group-class' => PT_CV_PREFIX . 'group-depend',
+							),
+						),
+						'params'		 => array(
+							array(
+								'type'	 => 'group',
+								'params' => array(
+									$inserted
+								),
+							),
+						),
+						'dependence'	 => array( 'field-thumbnail-size', PT_CV_PREFIX . 'custom', '!=' ),
+					);
+
+					array_splice( $args, 1 + $idx++, 0, array( $inserted ) );
+				}
+			}
+
+			return $args;
+		}
+
+		static function thumbnail_bottom_settings( $args, $prefix ) {
+			$extra = PT_CV_Settings::prosetting_class( true );
+
+			// Effect
+			$args[] = array(
+				'label'		 => array(
+					'text' => __( 'Hover Effect' ),
+				),
+				'extra_setting'	 => $extra,
+				'params'	 => array(
+					array(
+						'type'		 => 'select',
+						'name'		 => 'thumbnailEffect',
+						'options'	 => ContentViews_Block_Common::thumbnail_effects(),
+						'std'		 => '',
+					),
+				),
+				//'dependence' => array( 'view-type', array_keys( PT_CV_Values::hybrid_layouts() ) ),
+			);
+
+			if ( !get_option( 'pt_cv_version_pro' ) ) {
+				$args[] = array(
+					'label'			 => array(
+						'text' => __( 'Substitute Option' ),
+					),
+					'extra_setting'	 => $extra,
+					'params'		 => array(
+						array(
+							'type'		 => 'select',
+							'name'		 => $prefix . 'thumbnail-subtmp',
+							'options'	 => ContentViews_Block_Common::img_sub_options(),
+							'std'		 => 'image',
+						),
+					),
+				);
+				$args[]	 = PT_CV_Settings::get_cvpro( 'subImg', __( 'If no featured image is added to a post, show the substitute option as thumbnail', 'content-views-query-and-display-post-page' ) );
+
+				$args[]	 = array(
+					'label'			 => array(
+						'text' => __( 'Lazy load' ),
+					),
+					'extra_setting'	 => $extra,
+					'params'		 => array(
+						array(
+							'type'		 => 'checkbox',
+							'name'		 => $prefix . 'thumbnail-lazytmp',
+							'options'	 => PT_CV_Values::yes_no( 'yes', __( 'Enable' ) ),
+							'std'		 => '',
+						),
+					),
+				);
+				$args[]	 = PT_CV_Settings::get_cvpro( 'lazyImg', __( 'Defer loading of images until they are needed, to improve page load time', 'content-views-query-and-display-post-page' ) );
+			}
+
+			return $args;
+		}
+
+		static function thumbnail_position_extra_settings( $args ) {
+
+			$args = array(
+				'label'			 => array(
+					'text' => __( 'Thumbnail position (for other posts)', 'content-views-query-and-display-post-page' ),
+				),
+				'extra_setting'	 => array(
+					'params' => array(
+						'group-class'	 => PT_CV_PREFIX . 'thumb-position',
+						'wrap-class'	 => PT_CV_PREFIX . 'w200',
+					),
+				),
+				'params'		 => array(
+					array(
+						'type'		 => 'select',
+						'name'		 => 'thumbPositionOthers',
+						'options'	 => PT_CV_Values::thumbnail_position(),
+						'std'		 => 'left',
+					),
+				),
+				'dependence'	 => array( 'view-type', [ 'onebig1' ] ),
+			);
+
+			return $args;
+		}
+
+		static function ppp_settings( $args ) {
+			$args = array(
+				'label'			 => array(
+					'text' => '',
+				),
+				'extra_setting'	 => array(
+					'params' => array(
+						'width' => 12,
+					),
+				),
+				'params'		 => array(
+					array(
+						'type'	 => 'group',
+						'params' => array(
+							$args
+						),
+					),
+				),
+				'dependence'	 => array( 'view-type', PT_CV_Values::fixed_ppp_layouts(), '!=' ),
+			);
+
+			return $args;
 		}
 
 	}
